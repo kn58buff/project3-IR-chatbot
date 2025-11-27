@@ -1,10 +1,13 @@
-import retrieval
-import wikipedia
 import pandas as pd
 import numpy as np
+import indexer
+import query_processor as qp
+import pickle
+#import scraper
 
-scraper = retrieval.Scraper()
-indexer = retrieval.Indexer()
+#scraper = scraper.Scraper()
+#indexer = indexer.Indexer()
+indexer = indexer.Indexer.load("./inverted_index.pkl")
 
 def test_scraper():
     health_queries = [
@@ -127,13 +130,11 @@ def test_scraper():
         "special education",
         "early childhood education",
         "higher education statistics",
-        "teacher workforce data",
         "educational technology",
         "homeschooling",
         "language learning",
         "adult education",
         "vocational training",
-        "education policy",
         "school safety",
         "STEM education",
         "women in STEM"
@@ -192,8 +193,19 @@ def test_scraper():
     df = scraper.run_scraper(all_queries, save=True)
 
 def test_indexer():
-    #indexer._add_fields()
 
-    indexer._index_documents()
+   # indexer.run_indexer()
+
+    #indexer._save()
+
+    print(f"Corpus statistics:\
+           \n Indexed Docs: {indexer.total_docs}\
+           \n Avg doc length: {indexer.avg_doc_length}")
+    
+    scorer = qp.QueryProcessor(indexer)
+    retrieved_docs = scorer.retrieve_rel_docs("science and technology in films", 5)
+
+    print(retrieved_docs)
 
 test_indexer()
+#test_scraper()

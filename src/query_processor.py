@@ -47,7 +47,10 @@ class QueryProcessor:
 
         scores = OrderedDict({})
         for token in query_tokens:
-            postings = self.index.inverted_index.get(token).copy()
+            postings = self.index.inverted_index.get(token, [])
+            if not postings:
+                continue
+            postings = postings.copy()
             log_idf = np.log(postings.pop("IDF"))
             
             for doc in postings.keys():

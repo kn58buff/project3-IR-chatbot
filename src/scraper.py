@@ -99,7 +99,6 @@ class Scraper:
         return batched_data
     
     def _scrape_search_results(self, page_titles, max_workers=10):
-        
         data = []
         batches = list(self._create_chunks(page_titles, 10))
         print(len(batches))
@@ -120,6 +119,7 @@ class Scraper:
         topics = ["health", "environment", "technology", "economy", "entertainment",
           "sports", "politics", "education", "travel", "food"]
         
+        # Retrieves pages in batches and build a single dataframe
         df = pd.DataFrame()
         for qs, topic in zip(to_scrape, topics):
             print(f"Scraping topic: {topic} with {len(qs)} queries")

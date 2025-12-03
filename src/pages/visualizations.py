@@ -78,6 +78,8 @@ else:
 
     st.subheader("Query Logs")
     for log in st.session_state.query_log:
+        if log["intent"] != "retrieval":
+            continue
         st.write(f"### Query: {log['query']}")
         col1, col2 = st.columns(2)
         with col1:

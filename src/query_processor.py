@@ -26,7 +26,6 @@ class QueryProcessor:
     def _classify_query(self, query):
         query_tokens = self._preprocess_query(query)
         pred_topics = self.TC.NB_classify(query_tokens)[0]
-        print(pred_topics)
         return pred_topics
     
     def _compute_RSVBM25_score(self, query, k = 1.2, b = 0.75, topics = None):

@@ -3,7 +3,3 @@ src/pages/.streamlit/secrets.toml
 src/test.py
 src/__pycache__/
 *.pyc
-.DS_Store
-NB_classifier.pkl
-inverted_index.pkl
-wikipedia_scraped_data.csv

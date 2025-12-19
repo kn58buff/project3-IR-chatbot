@@ -23,7 +23,7 @@ def load_resources():
 def load_llm():
     model_name = "llama3.2"
 
-    llm = OllamaLLM(model = model_name)
+    llm = OllamaLLM(model = model_name, temperature = 0.5)
     return llm
 
 @st.cache_data
@@ -75,7 +75,7 @@ You are a classifier. Determine if the user wants:
 
 User message: {input}
 
-Return ONLY one word: "chitchat" or "retrieval".
+Return ONLY one word: CHITCHAT or RETRIEVAL
 """
 )
 
@@ -184,7 +184,7 @@ if cbox:
 
     st.session_state.messages.append({"role": "user", "content": cbox})
 
-    route = split_chain.invoke({"input": cbox})
+    route = split_chain.invoke({"input": cbox}).lower()
     print(route)
 
     st.session_state.start_time = time.time()
